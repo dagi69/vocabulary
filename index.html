@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vocabulary Practice</title>
+  <meta name="description" content="Learn one word at a time.">
+
+  <!-- Apply saved theme before first paint (avoids a light flash in dark mode) -->
+  <script>
+    try {
+      var t = localStorage.getItem('vp-theme');
+      if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-bs-theme', t);
+    } catch (e) {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500..700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="app container-fluid d-flex flex-column min-vh-100 px-3">
+
+    <header class="text-center pt-4 pt-md-5 pb-2">
+      <h1 class="site-title">Vocabulary Practice</h1>
+      <p class="site-subtitle mb-0">Learn one word at a time.</p>
+    </header>
+
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center py-4">
+      <div class="stage w-100">
+
+        <!-- Loading state -->
+        <div id="loading" class="text-center py-5" role="status">
+          <div class="spinner-border spinner-border-sm me-2" aria-hidden="true"></div>
+          <span>Loading vocabulary...</span>
+        </div>
+
+        <!-- Errors appear here -->
+        <div id="alert-area"></div>
+
+        <!-- Vocabulary card -->
+        <section id="vocab-card" class="card vocab-card" aria-labelledby="card-label" hidden>
+          <div id="round-bar" class="round-bar" role="progressbar" aria-label="Words seen this round"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span id="round-progress"></span>
+          </div>
+
+          <div class="card-body text-center">
+            <div id="card-content" class="swap">
+              <p id="card-label" class="card-label">Vocabulary</p>
+              <h2 id="word" class="vocab-word"></h2>
+              <hr class="vocab-divider">
+              <div id="meaning-wrap" class="meaning-wrap" aria-hidden="true">
+                <div class="meaning-inner">
+                  <p id="meaning" class="vocab-meaning"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="actions d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button id="toggle-meaning" type="button" class="btn btn-ghost"
+                      aria-expanded="false" aria-controls="meaning-wrap">Show Meaning</button>
+              <button id="next-word" type="button" class="btn btn-accent"
+                      aria-keyshortcuts="Space">Next Word &rarr;</button>
+            </div>
+            <p class="hint d-none d-md-block">Press <kbd>Space</kbd> for the next word</p>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer id="stats" class="text-center pb-4 pb-md-5" hidden>
+      <div class="stats d-flex justify-content-center gap-4">
+        <span>Words: <strong id="total-count">0</strong></span>
+        <span id="practiced-count">0 words practiced</span>
+      </div>
+      <button id="theme-toggle" type="button" class="btn btn-ghost btn-sm theme-toggle"></button>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
